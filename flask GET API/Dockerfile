@@ -2,7 +2,7 @@
 FROM python:3.8-slim
 
 # Set environment variables for Flask
-ENV FLASK_APP Flask.py
+ENV FLASK_APP getapi.py
 
 ENV FLASK_RUN_HOST 0.0.0.0
 ENV FLASK_RUN_PORT 5000
@@ -11,7 +11,7 @@ ENV FLASK_RUN_PORT 5000
 
 WORKDIR /flask
 # Copy the current directory contents into the container at /app
-COPY Flask.py /flask
+COPY getapi.py /flask
 
 # Install any needed packages specified in requirements.txt
 RUN pip install flask
