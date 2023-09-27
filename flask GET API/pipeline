@@ -1,0 +1,13 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                dir('flask GET API') {
+                    sh 'ls'
+                    sh 'docker build -t flask -f Dockerfile .'
+                }
+            }
+        }
+    }
+}
