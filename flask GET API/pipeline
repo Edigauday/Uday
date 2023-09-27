@@ -6,6 +6,20 @@ pipeline {
                 dir('flask GET API') {
                     sh 'ls'
                     sh 'docker build -t flask -f Dockerfile .'
+        stage('Push to Docker Hub') {
+                steps {
+                    // Authenticate with Docker Hub using credentials
+                    withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIALS, usernameVariable: 'sreeramulauday10@gmail.com', passwordVariable: 'July@072023')]) {
+                        // Login to Docker Hub
+                        sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD"
+    
+     
+    
+                        // Push the Docker image to Docker Hub
+                        sh "docker push flask"
+                    }
+                }
+            }
                 }
             }
         }
