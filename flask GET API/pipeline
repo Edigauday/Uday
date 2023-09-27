@@ -12,7 +12,7 @@ pipeline {
         
         stage('Push to Docker Hub') {
             steps {
-                    sh "sudo docker login -u sreeramulauday10@gmail.com -p July@072023"
+                    sh "docker login -u sreeramulauday10@gmail.com -p July@072023"
                     sh "docker push flask"
                 }
             }
