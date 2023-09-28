@@ -8,7 +8,7 @@ WORKDIR /testwork
 
 # Copy the Python script to the container
 COPY my_testbed.yaml /testwork/
-COPY pyats_sample.py /testwork/
+COPY rechability_version.py /testwork/
 
 # Run the Python script when the container launches
-ENTRYPOINT ["python", "/testwork/pyats_sample.py"]
+ENTRYPOINT ["python", "/testwork/rechability_version.py"]
