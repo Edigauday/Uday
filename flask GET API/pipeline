@@ -21,9 +21,9 @@ pipeline {
             steps {
                 script {
                   
-                    def EC2_HOST = '51.20.55.196'
-                    def EC2_USER = 'ec2-user'
-                    withCredentials([file(credentialsId: 'redhat_pemkey', variable: 'PRIVATE_KEY_FILE')]) {
+                    def EC2_HOST = '516.171.54.192'
+                    def EC2_USER = 'ubuntu'
+                    withCredentials([file(credentialsId: 'ubuntu_pemkey', variable: 'PRIVATE_KEY_FILE')]) {
                         sh """
                             chmod 400 \$PRIVATE_KEY_FILE
                             ssh -i \$PRIVATE_KEY_FILE -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $EC2_USER@$EC2_HOST<< EOF
