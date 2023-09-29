@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                   
-                    def EC2_HOST = '516.171.54.192'
+                    def EC2_HOST = '16.171.54.192'
                     def EC2_USER = 'ubuntu'
                     withCredentials([file(credentialsId: 'ubuntu_pemkey', variable: 'PRIVATE_KEY_FILE')]) {
                         sh """
