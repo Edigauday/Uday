@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y openssh-client
 WORKDIR /testwork
 
 # Copy the Python script to the container
-COPY two_testbeds.yaml /testwork/
+COPY two_devices.yaml /testwork/
 COPY two_devices_interface.py /testwork/
 
 # Run the Python script when the container launches
