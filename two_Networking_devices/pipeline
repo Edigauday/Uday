@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                dir('two_Networking_devices') {
+                    sh 'ls'
+                    sh 'docker build -t interface -f Dockerfile .'
+                }
+            }
+        }
+        
+        stage('Push to Docker Hub') {
+            steps {
+                    sh "docker login -u sreeramulauday10@gmail.com -p July@072023"
+                    sh "docker tag interface edigauday/uday:interface"
+                    sh "docker push edigauday/uday:interface"
+                }
+            }
+            stage('Pull Docker Image on EC2') {
+            steps {
+                script {
+                  
+                    def EC2_HOST = '16.171.54.192'
+                    def EC2_USER = 'ubuntu'
+                    withCredentials([file(credentialsId: 'ubuntu_pemkey', variable: 'PRIVATE_KEY_FILE')]) {
+                        sh """
+                            chmod 400 \$PRIVATE_KEY_FILE
+                            ssh -i \$PRIVATE_KEY_FILE -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $EC2_USER@$EC2_HOST<< EOF
+                            
+                            sudo docker login -u sreeramulauday10@gmail.com -p 'July@072023>>'
+                            sudo docker pull edigauday/uday:interface
+                            sudo docker run -d -p 5000:5000 edigauday/uday:interface
+                        """
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
