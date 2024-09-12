@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                dir('sample_pyats') {
+                    sh 'ls'
+                    sh 'docker build -t pyats -f Dockerfile .'
+                }
+            }
+        }
+        
+        stage('Push to Docker Hub') {
+            steps {
+                    sh "docker login -u sreeramulauday10@gmail.com -p July@072023"
+                    sh 'docker tag pyats edigauday/uday:pyats'
+                    sh "docker push edigauday/uday:pyats"
+                }
+            }
+        }
+    
+}
+
